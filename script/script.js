@@ -20,7 +20,7 @@ let users = [
     {
         sn: 4,
         name: "sarah",
-        email: "sarah@gmail.com",
+        email: "sarah@gmail.com", 
         age: 27,
     },
     {
@@ -73,7 +73,7 @@ let users = [
     },
     {
         sn: 13,
-        name: aisha,
+        name: "aisha",
         email: "aisha@gmail.com",
         age: 20,
     },
@@ -122,27 +122,65 @@ let users = [
 
 ]
 
-function searchUser() {
-
-    let search = document.getElementById("searchInput").value.toLowerCase();
-
+function displayUsers(data = users) {
     let table = document.getElementById("userTableBody");
-
     table.innerHTML = "";
 
-    for(let i = 0; i < users.length; i++) {
+    data.forEach(user => {
+        table.innerHTML += `
+        <tr>
+            <td>${user.sn}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.age}</td>
+        </tr>
+        `;
+    });
+}
 
-        if(users[i].name.toLowerCase().includes(search)) {
+displayUsers();
+document.getElementById("addName").value ="";
+document.getElementById("addEmail").value ="";
+document.getElementById("addAge").value ="";
 
-            table.innerHTML += `
-            <tr>
-                <td>${users[i].id}</td>
-                <td>${users[i].name}</td>
-                <td>${users[i].email}</td>
-                <td>${users[i].age}</td>
-            </tr>
-            `;
-        }
+    
+
+    // add user
+function addUser() {
+  let name = document.getElementById("addName").value;
+  let email = document.getElementById("addEmail").value;
+  let age = document.getElementById("addAge").value;
+
+
+  if(name == "" || email == "" || age == "") {
+    alert("Fill all fields");
 
     }
+  
+  let newSN = users.length + 1;
+  users.push({sn: newSN, name: name, email: email, age: Number(age)})
+
+}
+  //  Delete user
+function deleteUser(sn) {
+  if(confirm("Delete this user?")) {
+    users = users.filter(u => u.sn !== sn);
+    displayUsers();
+  }
+}
+
+
+//  Search user
+function searchUser() {
+  let text = document.getElementById("searchInput").value.toLowerCase();
+  let filtered = [];
+  
+  users.forEach(u => {
+    if(u.name.toLowerCase().includes(text) || u.email.toLowerCase().includes(text)) {
+      filtered.push(u);
+    }
+  });
+  
+  displayUsers(filtered);
+
 }
