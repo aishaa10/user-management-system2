@@ -121,3 +121,28 @@ let users = [
     },
 
 ]
+
+function searchUser() {
+
+    let search = document.getElementById("searchInput").value.toLowerCase();
+
+    let table = document.getElementById("userTableBody");
+
+    table.innerHTML = "";
+
+    for(let i = 0; i < users.length; i++) {
+
+        if(users[i].name.toLowerCase().includes(search)) {
+
+            table.innerHTML += `
+            <tr>
+                <td>${users[i].id}</td>
+                <td>${users[i].name}</td>
+                <td>${users[i].email}</td>
+                <td>${users[i].age}</td>
+            </tr>
+            `;
+        }
+
+    }
+}
