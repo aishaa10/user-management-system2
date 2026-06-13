@@ -135,29 +135,10 @@ function displayUsers(data = users) {
             <td>${user.name}</td>
             <td>${user.email}</td>
             <td>${user.age}</td>
-            
-        <td>
-                <button
-                    class="btn btn-warning btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateUserModal"
-                    onclick= "updateUser(${user.sn})">
-                    Update
-                </button>
-
-                <button
-                    class="btn btn-danger btn-sm"
-                    onclick="deleteUser(${user.sn})">
-                    Delete
-                </button>
-            </td>
-
-        
         </tr>
         `;
     });
 }
-
 
 displayUsers();
 document.getElementById("addName").value ="";
@@ -165,7 +146,6 @@ document.getElementById("addEmail").value ="";
 document.getElementById("addAge").value ="";
 
     
-
 
     // add user
 
@@ -184,24 +164,7 @@ console.log("dog")
   
   let newSN = users.length + 1;
   users.push({sn: newSN, name: name, email: email, age: Number(age)})
-console.log(users)
-displayUsers();
-}
 
-//update user
-function updateUser(sn){
-    let index= users.findIndex(u => u.sn === sn)
-
-    let newName = prompt("enter new name:", users[index].name);
-    let newAge = prompt("enter new age:", users[index].age);
-    let newEmail = prompt("enter new email:", users[index].email);
-
-    users[index].name = newName;
-    users[index].email = newEmail;
-    users[index].age = newAge;
- console.log(users[index])
-
- displayUsers();
 }
   //  Delete user
 function deleteUser(sn) {
@@ -211,6 +174,7 @@ function deleteUser(sn) {
     displayUsers();
   }
 }
+
 
 
 //  Search user
@@ -225,6 +189,5 @@ function searchUser() {
   });
   
   displayUsers(filtered);
-
 }
 
