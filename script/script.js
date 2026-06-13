@@ -122,28 +122,6 @@ let users = [
 
 ]
 
-function displayUsers(data = users) {
-    let table = document.getElementById("userTableBody");
-    table.innerHTML = "";
-
-    data.forEach(user => {
-        table.innerHTML += `
-        <tr>
-            <td>${user.sn}</td>
-            <td>${user.name}</td>
-            <td>${user.email}</td>
-            <td>${user.age}</td>
-        </tr>
-        `;
-    });
-}
-
-displayUsers();
-document.getElementById("addName").value ="";
-document.getElementById("addEmail").value ="";
-document.getElementById("addAge").value ="";
-
-    
 
     // add user
 function addUser() {
@@ -160,7 +138,25 @@ function addUser() {
   let newSN = users.length + 1;
   users.push({sn: newSN, name: name, email: email, age: Number(age)})
 
+displayUsers();
+document.getElementById("addName").value ="";
+document.getElementById("addEmail").value ="";
+document.getElementById("addAge").value ="";
+xcv
 }
+    function DataSet(items) {
+    let name=document.getElementById("name").innerHTML
+    name=items
+    console.log(items)
+}
+users.forEach(DataSet)
+let maxSn = 0;
+  users.forEach(u => {
+    if(u.sn > maxSn) maxSn = u.sn;
+  });
+
+  users.push({sn: maxSn + 1, name: name, email: email, age: Number(age)});
+
   //  Delete user
 function deleteUser(sn) {
   if(confirm("Delete this user?")) {
@@ -168,6 +164,7 @@ function deleteUser(sn) {
     displayUsers();
   }
 }
+
 
 
 //  Search user
@@ -182,5 +179,4 @@ function searchUser() {
   });
   
   displayUsers(filtered);
-
 }
