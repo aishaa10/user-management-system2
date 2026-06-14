@@ -1,5 +1,7 @@
+let selectedUserSN = null;
 console.log("script loaded");
 let selectedUserIndex = -1;
+
 let users = [
     {
         sn: 1,
@@ -136,21 +138,23 @@ function displayUsers(data = users) {
             <td>${user.email}</td>
             <td>${user.age}</td>
             
-        <td>
-                <button
-                    class="btn btn-warning btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateUserModal"
-                    onclick= "updateUser(${user.sn})>
-                    Update
-                </button>
+            <td>
+    <button
+        class="btn btn-warning btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#updateUserModal"
+        onclick="openUpdateModal(${user.sn})">
+        Update
+    </button>
 
-                <button
-                    class="btn btn-danger btn-sm"
-                    onclick="deleteUser(${user.sn})">
-                    Delete
-                </button>
-            </td>
+    <button
+        class="btn btn-danger btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#deleteUserModal"
+        onclick="openDeleteModal(${user.sn})">
+        Delete
+    </button>
+</td>
 
         
         </tr>
@@ -188,28 +192,36 @@ console.log(users)
 displayUsers();
 }
 
-//update user
-function updateUser(sn){
-    let index= users.findIndex(u => u.sn === sn)
+function openUpdateModal(sn) {
+    selectedUserSN = sn;
 
-    let newName = prompt("enter new name:", users[index].name);
-    let newAge = prompt("enter new age:", users[index].age);
-    let newEmail = prompt("enter new email:", users[index].email);
+    let user = users.find(u => u.sn === sn);
 
-    users[index].name = newName;
-    users[index].email = newEmail;
-    users[index].age = newAge;
- console.log(users[index])
+    document.getElementById("updateName").value = user.name;
+    document.getElementById("updateEmail").value = user.email;
+    document.getElementById("updateAge").value = user.age;
+}
 
- displayUsers();
+function updateUser() {
+
+    let user = users.find(u => u.sn === selectedUserSN);
+
+    user.name = document.getElementById("updateName").value;
+    user.email = document.getElementById("updateEmail").value;
+    user.age = document.getElementById("updateAge").value;
+
+    displayUsers();
+}
+
+function openDeleteModal(sn) {
+    selectedUserSN = sn;
 }
   //  Delete user
-function deleteUser(sn) {
-  if(confirm("Delete this user?")) {
-    users = users.filter(u => u.sn !== sn);
-    console.log(users)
+function deleteUser() {
+
+    users = users.filter(u => u.sn !== selectedUserSN);
+
     displayUsers();
-  }
 }
 
 

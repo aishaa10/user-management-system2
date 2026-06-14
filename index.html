@@ -91,7 +91,8 @@
             </div>
         </div>
     </div>
-        <div class="modal fade" id="updateUserModal" tabindex="-1">
+        <!-- Update User Modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -127,22 +128,25 @@
 
             <div class="modal-footer">
                 <button
+                    type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal">
                     Close
                 </button>
 
-                <button class="btn btn-warning btn-sm"
-                 onclick="$({index})">
+                <button
+                    type="button"
+                    class="btn btn-warning"
+                    onclick="updateUser()">
                     Update User
                 </button>
-                
             </div>
 
         </div>
     </div>
 </div>
 
+<!-- Delete User Modal -->
 <div class="modal fade" id="deleteUserModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -167,12 +171,16 @@
 
             <div class="modal-footer">
                 <button
+                    type="button"
                     class="btn btn-secondary"
                     data-bs-dismiss="modal">
                     Cancel
                 </button>
 
-                <button class="btn btn-danger">
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="deleteUser()">
                     Delete
                 </button>
             </div>
